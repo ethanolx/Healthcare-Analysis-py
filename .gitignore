@@ -1,0 +1,11 @@
+# Visual Studio Code Configurations
+.vscode
+
+# Temporary Files
+tmp
+
+# Brief
+*.pdf
+
+# Module Cache Files
+src/utils/__pycache__
