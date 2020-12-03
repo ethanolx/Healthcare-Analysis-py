@@ -1,12 +1,16 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from utils.stats_options import Statistic
 
 fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2)
-obesity_rates = np.genfromtxt('./data/common-health-problems-of-students-examined-overweight-annual.csv', delimiter=',', skip_header=1, dtype=[('year', int), ('age_group', 'U35'), ('gender', 'U10'), ('per_10000_examined', int)])
+file_name = './data/common-health-problems-of-students-examined-overweight-annual.csv'
+obesity_rates: np.ndarray = np.genfromtxt(file_name, delimiter=',', skip_header=1, dtype=[('year', int), ('age_group', 'U35'), ('gender', 'U10'), ('per_10000_examined', int)])
 
 # Text Summary
-from utils.summaries import text
-text(obesity_rates)
+from utils.summaries import describe as desc
+*all_stats, _ = Statistic
+print(list(Statistic))
+desc(obesity_rates, file_name, all_stats)
 
 # Pie Chart
 male = obesity_rates['gender'] == 'Male'
@@ -38,5 +42,6 @@ ax2.set_ylabel('Number of Students (per 10000 examined)')
 ax2.legend(loc='upper left')
 ax2.set_xticks(years)
 
+plt.style.use('ggplot')
 plt.tight_layout()
-plt.show()
+# plt.show()

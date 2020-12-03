@@ -5,6 +5,10 @@ import matplotlib.pyplot as plt
 pharmacists = np.genfromtxt('./data/number-of-pharmacists.csv', delimiter=',',
                             skip_header=1, dtype=[('year', int), ('sector', 'U25'), ('count', int)])
 
+from utils.summaries import describe as desc
+from utils.stats_options import Statistic
+*all_stats, _ = Statistic
+desc(pharmacists, './data/number-of-pharmacists.csv', all_stats, 3)
 
 private = pharmacists['sector'] == 'Private Sector'
 public = pharmacists['sector'] == 'Public Sector'
