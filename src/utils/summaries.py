@@ -28,10 +28,10 @@ def _statistical_summary(array: np.ndarray, stats: List[Statistic], precision: i
 
     for row in _select_statistics(array, stats):
         # Statistic Type
-        entry = row[0].value + '\t'
+        entry = ' ' * 4 + row[0].value + '\t'
 
         # Values
-        entry += '\t'.join(map(lambda x: str(round(x, precision)) if (type(x) is float or type(x) is np.float64) else str(x), row[1]))
+        entry += '\t'.join(map(lambda x: str(round(x, precision)) if (type(x) is float or type(x) is np.float64) else str(x), row[1])) #type: ignore
 
         body += entry.expandtabs(partition_size)
 
@@ -55,7 +55,7 @@ def _select_statistics(array: np.ndarray, stats: List[Statistic]) -> List[Tuple[
             Statistic.STD: (np.std, True),
             Statistic.COUNT: (np.count_nonzero, False),
             Statistic.DTYPE: (lambda x: x.dtype, False),
-            Statistic.DEFAULT: (lambda x: x.dtype, False)
+            Statistic.MODE: (lambda)
         })
         if (len(fn) == 3):
             s.append((statistic, _operation(array, lambda arr: fn[0](arr, fn[2]), fn[2])))
@@ -67,7 +67,7 @@ def _operation(array: np.ndarray, fn: Callable[[np.ndarray], Union[int, float]],
     summary_row: List[Union[float, int, None]] = []
     for col in array.dtype.fields:
         series: np.ndarray = array[col]
-        if not limit_to_quantitative or np.issubdtype(series.dtype, np.number):
+        if not limit_to_quantitative or np.issubdtype(series.dtype, np.number): #type: ignore
             summary_row.append(fn(series))
         else:
             summary_row.append(None)

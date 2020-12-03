@@ -1,15 +1,22 @@
+# Import 3rd-Party Libraries and Custom Modules
 import numpy as np
 import matplotlib.pyplot as plt
+from utils.stats_options import Statistic
+from utils.summaries import describe as desc
 
-# Scatterplot
-pharmacists = np.genfromtxt('./data/number-of-pharmacists.csv', delimiter=',',
+# Choose Chart Style
+plt.style.use('ggplot')  # type: ignore
+
+# Import Data
+file_name = 'data/number-of-pharmacists.csv'
+pharmacists = np.genfromtxt(file_name, delimiter=',',
                             skip_header=1, dtype=[('year', int), ('sector', 'U25'), ('count', int)])
 
-from utils.summaries import describe as desc
-from utils.stats_options import Statistic
-*all_stats, _ = Statistic
-desc(pharmacists, './data/number-of-pharmacists.csv', all_stats, 3)
+# Summarise Data
+[*all_stats] = Statistic
+desc(pharmacists, file_name, all_stats, 3) #type: ignore
 
+# Scatterplot
 private = pharmacists['sector'] == 'Private Sector'
 public = pharmacists['sector'] == 'Public Sector'
 inactive = pharmacists['sector'] == 'Not in Active Practice'
@@ -28,5 +35,5 @@ for i, s in enumerate(sectors):
 plt.title('Number of Pharmacists in Singapore (by sector)')
 plt.legend(loc='upper left')
 
+# Display Chart
 plt.show()
-

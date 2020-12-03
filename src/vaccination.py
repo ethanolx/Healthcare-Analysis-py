@@ -1,11 +1,24 @@
+# Import 3rd-Party Libraries and Custom Modules
 import numpy as np
 import matplotlib.pyplot as plt
+from utils.stats_options import Statistic
+from utils.summaries import describe as desc
 
-fig, (ax1, ax2) = plt.subplots(nrows=2, ncols=1)
+# Choose Chart Style
+plt.style.use('seaborn-muted') #type: ignore
 
-vaccination = np.genfromtxt('./data/vaccination-and-immunisation-of-students-annual.csv', delimiter=',', skip_header=1, dtype=[('year', int), ('type', 'U30'), ('no_of_doses_k', int)])
+# Import Data
+file_name = 'data/vaccination-and-immunisation-of-students-annual.csv'
+vaccination = np.genfromtxt(file_name, delimiter=',', skip_header=1, dtype=[('year', int), ('type', 'U30'), ('no_of_doses_k', int)])
 
-# Bar
+# Instantiate Figure and Axes
+fig, (ax1, ax2) = plt.subplots(nrows=2, ncols=1) #type: ignore
+
+# Summarise Data
+[*all_stats] = Statistic
+desc(vaccination, file_name, all_stats) #type: ignore
+
+# Bar Chart
 x = vaccination['year']
 y = vaccination['no_of_doses_k']
 
@@ -30,5 +43,6 @@ ax2.set_title('Boxplot')
 ax2.set_xlabel('Number of Vaccinations (1000)')
 ax2.set_ylabel('Type of Vaccinations')
 
+# Display Charts
 plt.tight_layout()
 plt.show()

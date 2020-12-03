@@ -1,16 +1,22 @@
+# Import 3rd-Party Libraries and Custom Modules
 import numpy as np
 import matplotlib.pyplot as plt
 from utils.stats_options import Statistic
+from utils.summaries import describe as desc
 
-fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2)
-file_name = './data/common-health-problems-of-students-examined-overweight-annual.csv'
+# Choose Chart Style
+plt.style.use('seaborn') #type: ignore
+
+# Import Data
+file_name = 'data/common-health-problems-of-students-examined-overweight-annual.csv'
 obesity_rates: np.ndarray = np.genfromtxt(file_name, delimiter=',', skip_header=1, dtype=[('year', int), ('age_group', 'U35'), ('gender', 'U10'), ('per_10000_examined', int)])
 
-# Text Summary
-from utils.summaries import describe as desc
-*all_stats, _ = Statistic
-print(list(Statistic))
-desc(obesity_rates, file_name, all_stats)
+# Instantiate Figure and Axes
+fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2) #type: ignore
+
+# Summarise Data
+[*all_stats] = Statistic
+desc(obesity_rates, file_name, all_stats) #type: ignore
 
 # Pie Chart
 male = obesity_rates['gender'] == 'Male'
@@ -19,7 +25,7 @@ female = obesity_rates['gender'] == 'Female'
 male_sum = np.sum(obesity_rates[male]['per_10000_examined'])
 female_sum = np.sum(obesity_rates[female]['per_10000_examined'])
 
-ax1.pie((female_sum, male_sum), labels=['male', 'female'], startangle=90)
+ax1.pie((female_sum, male_sum), labels=['male', 'female'], startangle=90, autopct=lambda p: f'{p:.2f}%')
 ax1.set_title('Proportion of Students With Obesity (by gender)')
 
 # Line Chart
@@ -42,6 +48,9 @@ ax2.set_ylabel('Number of Students (per 10000 examined)')
 ax2.legend(loc='upper left')
 ax2.set_xticks(years)
 
-plt.style.use('ggplot')
+ax2.set_ylim((1900, 3500))
+ax2.text(2010, 2500, 'hello')
+
+# Display Charts
 plt.tight_layout()
-# plt.show()
+plt.show()
