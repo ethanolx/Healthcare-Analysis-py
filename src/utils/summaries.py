@@ -28,7 +28,7 @@ def _statistical_summary(array: np.ndarray, stats: List[Statistic], precision: i
 
     for row in _select_statistics(array, stats):
         # Statistic Type
-        entry = ' ' * 4 + row[0].value + '\t'
+        entry = row[0].value + '\t'
 
         # Values
         entry += '\t'.join(map(lambda x: str(round(x, precision)) if (type(x) is float or type(x) is np.float64) else str(x), row[1])) #type: ignore
@@ -54,8 +54,7 @@ def _select_statistics(array: np.ndarray, stats: List[Statistic]) -> List[Tuple[
             Statistic.VAR: (np.var, True),
             Statistic.STD: (np.std, True),
             Statistic.COUNT: (np.count_nonzero, False),
-            Statistic.DTYPE: (lambda x: x.dtype, False),
-            Statistic.MODE: (lambda)
+            Statistic.DTYPE: (lambda x: x.dtype, False)
         })
         if (len(fn) == 3):
             s.append((statistic, _operation(array, lambda arr: fn[0](arr, fn[2]), fn[2])))
