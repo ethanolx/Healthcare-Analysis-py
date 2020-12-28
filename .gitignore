@@ -7,5 +7,8 @@ tmp
 # Brief
 *.pdf
 
+# Insights
+*.pptx
+
 # Module Cache Files
 src/utils/__pycache__

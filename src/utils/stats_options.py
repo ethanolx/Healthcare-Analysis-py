@@ -1,8 +1,15 @@
 from enum import Enum
 
+
 class Statistic(Enum):
-    __order__ = 'COUNT MIN Q1 MEAN MED Q3 STD VAR MAX DTYPE'
+    """
+        Enum containing the various statistical operations supported
+
+        @public
+    """
+    __order__ = 'COUNT UNIQUE_COUNT MIN Q1 MEAN MED Q3 STD VAR MAX DTYPE'
     COUNT = 'count'
+    UNIQUE_COUNT = 'unique'
     MIN = 'min'
     Q1 = 'Q1'
     MEAN = 'mean'

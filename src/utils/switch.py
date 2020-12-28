@@ -1,4 +1,10 @@
 from typing import Any, Dict
 
-def _switch(condition: Any, cases: Dict[Any, Any]) -> Any:
+
+def switch(condition: Any, cases: Dict[Any, Any]) -> Any:
+    """
+        Meant to simulate a regular switch-case block
+
+        @protected
+    """
     return cases[condition]
