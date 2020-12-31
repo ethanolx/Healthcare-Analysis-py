@@ -1,5 +1,5 @@
+# Enum Inheritance
 from enum import Enum
-
 
 class Statistic(Enum):
     """

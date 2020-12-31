@@ -1,5 +1,5 @@
+# Type Checking
 from typing import Any, Dict
-
 
 def switch(condition: Any, cases: Dict[Any, Any]) -> Any:
     """

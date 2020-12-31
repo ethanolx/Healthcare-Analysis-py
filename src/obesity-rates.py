@@ -89,5 +89,5 @@ ax4.set_ylabel('Probability')
 ax4.set_title('Distribution of Obesity Rates in SG')
 
 # Display Charts
-plt.savefig('./assets/obesity.png')
+plt.savefig('./assets/obesity-rates.png')
 plt.show()

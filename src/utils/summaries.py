@@ -1,9 +1,13 @@
+# type: ignore
+# Type Checking
 from typing import Callable, List, Tuple, Union
+
+# Package Dependencies
 import numpy as np
 
+# Custom Dependencies
 from .switch import switch
 from .stats_options import Statistic
-
 
 def describe(array: np.ndarray, file_name: str, statistics: List[Statistic] = [Statistic.COUNT, Statistic.UNIQUE_COUNT, Statistic.DTYPE], precision: int = 2) -> None:
     """
@@ -11,8 +15,11 @@ def describe(array: np.ndarray, file_name: str, statistics: List[Statistic] = [S
 
         @public
     """
+
+    # Title of Summary
     print('SUMMARY OF DATA\n===============\n')
 
+    # Generic Details
     print(('File:\t\t' + file_name.split(sep='/')[1]).expandtabs(4))
     print(f'Rows:\t\t{array.shape[0]}'.expandtabs(4))
     print(f'Columns:\t{len(array[0])}'.expandtabs(4))
@@ -28,6 +35,7 @@ def _statistical_summary(array: np.ndarray, stats: List[Statistic], precision: i
 
         @private
     """
+    # Cell Width
     partition_size = 20
 
     # Construct Table Header
@@ -99,7 +107,3 @@ def _operation(array: np.ndarray, fn: Callable[[np.ndarray], Union[int, float]],
         else:
             summary_row.append(None)
     return summary_row
-
-
-if __name__ == '__main__':
-    print('Description: Module for describing data and producing summary statistics')
