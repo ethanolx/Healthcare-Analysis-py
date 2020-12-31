@@ -4,7 +4,9 @@
 |---------------|---|-----------------------|
 |   Author      | : |   Ethan Tan Wee En    |
 |   Admin       | : |   p2012085            |
+|   Class       | : |   DAAA/1B/03          |
 |   Language    | : |   Python              |
+|   Date        | : |   December 2020       |
 
 ## Setup
 
@@ -50,4 +52,4 @@
 
 ## Insights
 
-For details on data processing or insights gained, please refer to `docs/insights.pptx`
+For further details on data processing and insights gained, please refer to `docs/insights.pptx`
